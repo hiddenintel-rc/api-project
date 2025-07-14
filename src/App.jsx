@@ -1,46 +1,30 @@
-
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
 import WeatherSection from './components/WeatherSection';
 import VehiclesSection from './components/VehiclesSection';
 import TriviaSection from './components/TriviaSection';
 import BurgersSection from './components/BurgersSection';
-
-function Section({ title, endpoint }) {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    // Simulate fetching data from API
-    const fetchData = async () => {
-      try {
-        const response = await fetch(endpoint);
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        setData({ error: 'Failed to fetch data.' });
-      }
-    };
-
-    fetchData();
-  }, [endpoint]);
-
-  return (
-    <section className="w-full py-12 px-6 bg-gray-100 border-b border-gray-300">
-      <h2 className="text-2xl font-bold mb-4">{title}</h2>
-      <pre className="bg-white p-4 rounded shadow text-sm overflow-auto">
-        {data ? JSON.stringify(data, null, 2) : 'Loading...'}
-      </pre>
-    </section>
-  );
-}
+import Navbar from './components/Navbar.jsx';
 
 function App() {
   return (
-    <div className="flex flex-col items-center w-full">
-      <WeatherSection />
-      <VehiclesSection />
-      <TriviaSection />
-      <BurgersSection />
+    <div className="pt-16 bg-gray-50 min-h-screen">
+      <Navbar />
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 py-10">
+        <section id="weather">
+          <WeatherSection />
+        </section>
+        <section id="vehicles">
+          <VehiclesSection />
+        </section>
+        <section id="trivia">
+          <TriviaSection />
+        </section>
+        <section id="burgers">
+          <BurgersSection />
+        </section>
+      </main>
     </div>
   );
 }
