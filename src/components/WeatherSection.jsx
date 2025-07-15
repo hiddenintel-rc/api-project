@@ -7,6 +7,10 @@ function WeatherSection() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const baseUrl =
+  import.meta.env.VITE_API_BASE_URL        // ⬅ value at build time
+  ?? 'http://localhost:3001'; 
+
   const handleFetchWeather = async () => {
     setLoading(true);
     setError('');
@@ -14,7 +18,9 @@ function WeatherSection() {
 
     try {
       // Replace with your actual API URL and key
-      const response = await fetch(`http://localhost:3001/api/weather?city=${city}&state=${state}`);
+      const response = await fetch(
+        `${baseUrl}/api/weather?city=${city}&state=${state}`
+      );
 
       if (!response.ok) {
         throw new Error('Failed to fetch weather.');
